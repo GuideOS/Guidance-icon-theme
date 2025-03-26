@@ -12,29 +12,8 @@ fi
 
 SRC_DIR=$(cd $(dirname $0) && pwd)
 
-THEME_NAME=BigSur
-THEME_VARIANTS=('-black')
+THEME_NAME=Guidance
 COLOR_VARIANTS=('' '-dark')
-
-usage() {
-  printf "%s\n" "Usage: $0 [OPTIONS...]"
-  printf "\n%s\n" "OPTIONS:"
-  printf "  %-25s%s\n" "-d, --dest DIR" "Specify theme destination directory (Default: ${DEST_DIR})"
-  printf "  %-25s%s\n" "-n, --name NAME" "Specify theme name (Default: ${THEME_NAME})"
-  printf "  %-25s%s\n" "-c, --circle" "Install circle folder version"
-  printf "  %-25s%s\n" "-w, --white" "Install white panel icon color version"
-  printf "  %-25s%s\n" "-a, --all" "Install all color folder versions"
-  printf "  %-25s%s\n" "-red" "Red color folder version"
-  printf "  %-25s%s\n" "-pink" "Pink color folder version"
-  printf "  %-25s%s\n" "-purple" "Purple color folder version"
-  printf "  %-25s%s\n" "-blue" "Blue color folder version"
-  printf "  %-25s%s\n" "-green" "Green color folder version"
-  printf "  %-25s%s\n" "-yellow" "Yellow color folder version"
-  printf "  %-25s%s\n" "-orange" "Orange color folder version"
-  printf "  %-25s%s\n" "-brown" "Brown color folder version"
-  printf "  %-25s%s\n" "-black" "Black color folder version"
-  printf "  %-25s%s\n" "-h, --help" "Show this help"
-}
 
 install() {
   local dest=${1}
@@ -152,41 +131,8 @@ while [[ $# -gt 0 ]]; do
       name="${2}"
       shift 2
       ;;
-    -c|--circle)
-      circle='true'
-      ;;
-    -a|--all)
-      all="true"
-      ;;
-    -w|--white)
-      white="true"
-      ;;
-    -black)
-      theme="-black"
-      ;;
     -blue)
       theme="-blue"
-      ;;
-    -brown)
-      theme="-brown"
-      ;;
-    -green)
-      theme="-green"
-      ;;
-    -grey)
-      theme="-grey"
-      ;;
-    -orange)
-      theme="-orange"
-      ;;
-    -pink)
-      theme="-pink"
-      ;;
-    -purple)
-      theme="-purple"
-      ;;
-    -red)
-      theme="-red"
       ;;
     -h|--help)
       usage
@@ -205,14 +151,6 @@ install_theme() {
   for color in "${colors[@]-${COLOR_VARIANTS[@]}}"; do
     install "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${color}"
   done
-}
-
-install_all() {
-for theme in "${themes[@]-${THEME_VARIANTS[@]}}"; do
-  for color in "${colors[@]-${COLOR_VARIANTS[@]}}"; do
-    install "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${color}"
-  done
-done
 }
 
 if [[ "${all}" == 'true' ]]; then
